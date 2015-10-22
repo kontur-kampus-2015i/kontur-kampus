@@ -10,17 +10,17 @@ namespace CleanCode
 		[Test]
 		public void Test()
 		{
-            int testsCount = 0;
+			int testsCount = 0;
 			foreach (var file in Directory.GetFiles("ChessTests"))
 			{
 				if (Path.GetExtension(file) != string.Empty) continue;
 				using (var f = File.OpenText(file))
 				{
-				    Chess.Load_from(f);
-				    Console.WriteLine("Loaded " + file);
-				    var expectedAnswer = File.ReadAllText(file + ".ans").Trim();
-                    Chess.solveTask();
-                    Assert.AreEqual(expectedAnswer, Chess.Result, "error in file " + file);
+					Chess.LoadFrom(f);
+					Console.WriteLine("Loaded " + file);
+					var expectedAnswer = File.ReadAllText(file + ".ans").Trim();
+					Chess.SolveTask();
+					Assert.AreEqual(expectedAnswer, Chess.Result, "error in file " + file);
 				}
 				testsCount++;
 			}

@@ -19,7 +19,7 @@ namespace CleanCode
 				for (int x = 0; x < 8; x++)
 				{
 					char figureSign = line[x];
-				    PieceColor color = Char.IsUpper(figureSign) ? PieceColor.White : PieceColor.Black;
+					PieceColor color = Char.IsUpper(figureSign) ? PieceColor.White : PieceColor.Black;
 					Set(new Location(x, y), new CellContent(Piece.FromChar(figureSign), color));
 				}
 			}
@@ -61,25 +61,25 @@ namespace CleanCode
 		}
 	}
 
-    public class Move
-    {
-        private readonly Board board;
-        private readonly Location from;
-        private readonly Location to;
-        private readonly CellContent oldDestinationCell;
+	public class Move
+	{
+		private readonly Board board;
+		private readonly Location from;
+		private readonly Location to;
+		private readonly CellContent oldDestinationCell;
 
-        public Move(Board board, Location from, Location to, CellContent oldDestinationCell)
-        {
-            this.board = board;
-            this.from = from;
-            this.to = to;
-            this.oldDestinationCell = oldDestinationCell;
-        }
+		public Move(Board board, Location from, Location to, CellContent oldDestinationCell)
+		{
+			this.board = board;
+			this.from = from;
+			this.to = to;
+			this.oldDestinationCell = oldDestinationCell;
+		}
 
-        public void Undo()
-        {
-            board.Set(from, board.Get(to));
-            board.Set(to, oldDestinationCell);
-        }
-    }
+		public void Undo()
+		{
+			board.Set(from, board.Get(to));
+			board.Set(to, oldDestinationCell);
+		}
+	}
 }
