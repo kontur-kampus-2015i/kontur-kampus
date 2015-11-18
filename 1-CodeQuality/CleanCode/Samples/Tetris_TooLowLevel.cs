@@ -11,27 +11,27 @@ namespace CleanCode.Samples
 		private readonly int width;
 		private readonly int height;
 		private Cell[,] cells;
-		
-		public void ClearFullLines(ref int score)
+		private const int FILLED = 1;
+
+		public void ClearFullLines()
 		{
-			for (int i = 1; i < height + 1; i++)
+			for (int y = 0; y < height; y++)
 			{
 				int count = 0;
-				int line = 0;
-				for (int j = 1; j < width + 1; j++)
-					if (cells[j, i].getState() == 1)
+				int fullY = 0;
+				for (int x = 0; x < width; x++)
+					if (cells[x, y].getState() == FILLED)
 					{
 						count++;
-						if (count == width) line = i;
+						if (count == width) fullY = y;
 					}
 				if (count == width)
 				{
-					score++;
-					for (int h = line; h < height; h++)
-						for (int k = 1; k < width + 1; k++)
-							cells[k, h] = new Cell(k, h, cells[k, h + 1].getState());
-					for (int k = 1; k < width + 1; k++)
-						cells[k, height] = new Cell(k, height, 0);
+					for (int yy = fullY; yy < height; yy++)
+						for (int x = 0; x < width; x++)
+							cells[x, yy] = new Cell(x, yy, cells[x, yy + 1].getState());
+					for (int x = 0; x < width; x++)
+						cells[x, height] = new Cell(x, height, 0);
 				}
 
 			}
